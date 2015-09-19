@@ -34,8 +34,10 @@ def execute_command(conn, hashmap):
 
 def start(server_address):
     hashmap = {}
-    print("Starting Redis server at")
+
+    print("--- Starting Redis server at %s %d" % server_address)
     conn, client_address = accept(listen(create_socket(), server_address))
+    print("--- Server started")
     try:
         execute_command(conn, hashmap)
     finally:
