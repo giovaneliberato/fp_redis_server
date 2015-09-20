@@ -1,4 +1,4 @@
-Functional Python Redis Client
+Functional Python Redis Server
 ========
 
 This is a simple, memory and string only, redis server clone built using python, sockets and functional programming techniques.
