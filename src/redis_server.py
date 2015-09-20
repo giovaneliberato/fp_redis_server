@@ -36,14 +36,15 @@ def execute_command(conn, hashmap):
 def start(server_address):
     hashmap = {}
 
-    print("--- Starting Redis server at %s %d" % server_address)
+    print("--- Starting Redis server at %s:%d" % server_address)
     conn, client_address = accept(listen(create_socket(), server_address))
-    print("--- Client %s %d connected" % client_address)
+    print("--- Client connected: %s:%d" % client_address)
     try:
         execute_command(conn, hashmap)
     except Exception as e:
         print("--- Unknown error: %s" % e.message)
         conn.close()
+        start(server_address)
 
 if __name__ == "__main__":
     start(SERVER_ADDRESS)
