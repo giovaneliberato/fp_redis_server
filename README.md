@@ -18,4 +18,3 @@ To use it, you just need redis-cli installed.
 - SET
 - GET
 - INFO
-- QUIT

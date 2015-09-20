@@ -5,12 +5,8 @@ def info(conn, hashmap):
     return hashmap, "+Functional Python Redis Server running on %s port %d \r\n" % conn.getsockname()
 
 
-def quit(*args):
-    raise Exception("Bye!")
-
-
 def _command_not_found(command):
-    def inner(hashmap, *args):
+    def inner(_, hashmap, *args):
         return hashmap, "-ERR unknown command '%s'\r\n" % command
     return inner
 

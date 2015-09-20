@@ -29,6 +29,7 @@ def execute_command(conn, hashmap):
     command_fn = redis_commands.find(command)
     hashmap, response = command_fn(conn, hashmap, *params)
     conn.sendall(response)
+    print("--- Received command: %s" % command.upper())
     execute_command(conn, hashmap)
 
 
@@ -37,10 +38,11 @@ def start(server_address):
 
     print("--- Starting Redis server at %s %d" % server_address)
     conn, client_address = accept(listen(create_socket(), server_address))
-    print("--- Server started")
+    print("--- Client %s %d connected" % client_address)
     try:
         execute_command(conn, hashmap)
-    finally:
+    except Exception as e:
+        print("--- Unknown error: %s" % e.message)
         conn.close()
 
 if __name__ == "__main__":
